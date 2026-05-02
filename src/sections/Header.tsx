@@ -1,40 +1,18 @@
-import { useEffect, useRef, useState } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
+import { useEffect, useState } from 'react'
 
 export default function Header() {
-  const headerRef = useRef<HTMLElement>(null)
-  const [visible, setVisible] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
-  const lastScrollY = useRef(0)
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-        setVisible(false)
-      } else {
-        setVisible(true)
-      }
-      lastScrollY.current = currentScrollY
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
     }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    if (headerRef.current) {
-      gsap.to(headerRef.current, {
-        y: visible ? 0 : -100,
-        opacity: visible ? 1 : 0,
-        duration: 0.4,
-        ease: 'power2.out',
-      })
+    return () => {
+      document.body.style.overflow = ''
     }
-  }, [visible])
+  }, [menuOpen])
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id)
@@ -71,7 +49,6 @@ export default function Header() {
   return (
     <>
       <header
-        ref={headerRef}
         className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 h-14"
         style={{ background: 'transparent' }}
       >
