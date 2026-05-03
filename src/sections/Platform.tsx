@@ -6,39 +6,12 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function Platform() {
   const sectionRef = useRef<HTMLElement>(null)
-  const textContainerRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const section = sectionRef.current
-    const textContainer = textContainerRef.current
     const content = contentRef.current
-    if (!section || !textContainer || !content) return
-
-    const isMobile = window.innerWidth < 768
-
-    // Text Mask Reveal Animation (desktop only)
-    if (!isMobile) {
-      const foreground = textContainer.querySelector('.text-foreground') as HTMLElement
-      const background = textContainer.querySelector('.text-background') as HTMLElement
-      if (foreground && background) {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 1,
-            pin: textContainer,
-          },
-        })
-
-        tl.fromTo(
-          foreground,
-          { clipPath: 'inset(0 0% 0 0%)' },
-          { clipPath: 'inset(0 100% 0 0%)', ease: 'none' }
-        )
-      }
-    }
+    if (!section || !content) return
 
     // Content blocks animation
     const blocks = content.querySelectorAll('.platform-block')
@@ -67,69 +40,6 @@ export default function Platform() {
       className="relative w-full"
       style={{ backgroundColor: '#000000' }}
     >
-      {/* Background Video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover hidden md:block"
-        style={{ zIndex: 0, opacity: 0.2 }}
-      >
-        <source src="/video_hardware.mp4" type="video/mp4" />
-      </video>
-
-      {/* Text Mask Reveal - Pinned (desktop only) */}
-      <div
-        ref={textContainerRef}
-        className="relative w-full h-screen items-center justify-center overflow-hidden hidden md:flex"
-        style={{ zIndex: 2 }}
-      >
-        {/* Background Text (revealed) */}
-        <div
-          className="text-background absolute inset-0 flex items-center justify-center text-center"
-          style={{
-            fontFamily: "'Clash Display', sans-serif",
-            fontSize: 'clamp(60px, 37.5vw, 600px)',
-            fontWeight: 400,
-            lineHeight: 0.75,
-            letterSpacing: '-0.1vw',
-            color: '#ececec',
-            WebkitTextStroke: '1px #222226',
-            WebkitTextFillColor: 'transparent',
-          }}
-        >
-          HARDWARE
-        </div>
-
-        {/* Foreground Text (mask) */}
-        <div
-          className="text-foreground absolute inset-0 flex items-center justify-center text-center"
-          style={{
-            fontFamily: "'Clash Display', sans-serif",
-            fontSize: 'clamp(60px, 37.5vw, 600px)',
-            fontWeight: 400,
-            lineHeight: 0.75,
-            letterSpacing: '-0.1vw',
-            backgroundImage: 'linear-gradient(90deg, #222226, #222226 50%, #ececec 50%)',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            color: 'transparent',
-            clipPath: 'inset(0 0% 0 0%)',
-          }}
-        >
-          SOFTWARE
-        </div>
-
-        {/* Vignette Overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'linear-gradient(90deg, transparent 30%, #000000)',
-          }}
-        />
-      </div>
-
       {/* Platform Content */}
       <div
         ref={contentRef}
