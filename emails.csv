@@ -1,0 +1,7 @@
+username,full_name,is_admin,quota,quota_active
+sales@asthra.io,Sales Department,0,5242880,0
+partnerships@asthra.io,Partnershps Department,0,5242880,0
+support@asthra.io,Support Department,0,5242880,0
+website@asthra.io,Website Department,0,5242880,0
+legal@asthra.io,Legal Department,0,5242880,0
+
