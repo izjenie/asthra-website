@@ -57,11 +57,11 @@ export default function Trust() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-12 md:py-16 px-[5vw]"
+      className="relative w-full py-8 md:py-10 px-[5vw]"
       style={{ backgroundColor: '#ececec' }}
       id="trust"
     >
-      <div ref={headerRef} className="text-center mb-8">
+      <div ref={headerRef} className="text-center mb-6">
         <div className="text-eyebrow mb-4" style={{ color: '#3898ec' }}>
           TRUSTED BY INDUSTRY LEADERS
         </div>
@@ -72,24 +72,24 @@ export default function Trust() {
 
       <div
         ref={gridRef}
-        className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-[80vw] mx-auto"
+        className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-[80vw] mx-auto"
       >
         {partners.map((partner, i) => (
           <div
             key={partner.name}
-            className="partner-card flex flex-col items-center justify-center p-6 md:p-8 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            className="partner-card flex flex-col items-center justify-center p-4 md:p-5 transition-all duration-300 hover:scale-105 hover:shadow-lg"
             style={{
               backgroundColor: '#ffffff',
               border: '1px solid #b0b0b2',
               borderRadius: '8px',
-              minHeight: '160px',
+              minHeight: '120px',
             }}
           >
             {/* Logo image */}
             <img
               src={`/img_logo_${i + 1}.jpg`}
               alt={partner.name}
-              className="w-full h-auto max-h-20 object-contain mb-4"
+              className="w-full h-auto max-h-14 object-contain mb-2"
               onError={(e) => {
                 (e.target as HTMLImageElement).style.display = 'none'
               }}
