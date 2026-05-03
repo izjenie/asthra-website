@@ -15,26 +15,30 @@ export default function Platform() {
     const content = contentRef.current
     if (!section || !textContainer || !content) return
 
-    // Text Mask Reveal Animation
-    const foreground = textContainer.querySelector('.text-foreground') as HTMLElement
-    const background = textContainer.querySelector('.text-background') as HTMLElement
-    if (!foreground || !background) return
+    const isMobile = window.innerWidth < 768
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 1,
-        pin: textContainer,
-      },
-    })
+    // Text Mask Reveal Animation (desktop only)
+    if (!isMobile) {
+      const foreground = textContainer.querySelector('.text-foreground') as HTMLElement
+      const background = textContainer.querySelector('.text-background') as HTMLElement
+      if (foreground && background) {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1,
+            pin: textContainer,
+          },
+        })
 
-    tl.fromTo(
-      foreground,
-      { clipPath: 'inset(0 0% 0 0%)' },
-      { clipPath: 'inset(0 100% 0 0%)', ease: 'none' }
-    )
+        tl.fromTo(
+          foreground,
+          { clipPath: 'inset(0 0% 0 0%)' },
+          { clipPath: 'inset(0 100% 0 0%)', ease: 'none' }
+        )
+      }
+    }
 
     // Content blocks animation
     const blocks = content.querySelectorAll('.platform-block')
@@ -75,10 +79,10 @@ export default function Platform() {
         <source src="/video_hardware.mp4" type="video/mp4" />
       </video>
 
-      {/* Text Mask Reveal - Pinned */}
+      {/* Text Mask Reveal - Pinned (desktop only) */}
       <div
         ref={textContainerRef}
-        className="relative w-full h-screen flex items-center justify-center overflow-hidden"
+        className="relative w-full h-screen items-center justify-center overflow-hidden hidden md:flex"
         style={{ zIndex: 2 }}
       >
         {/* Background Text (revealed) */}
