@@ -52,6 +52,7 @@ export default function App() {
         <Solution />
         <Models />
         <Platform />
+        <Solutions />
         <About />
         <Trust />
         <Contact />
