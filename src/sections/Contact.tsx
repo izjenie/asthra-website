@@ -216,9 +216,8 @@ export default function Contact() {
 
               {[
                 { label: 'Full Name', type: 'text', name: 'name' },
-                { label: 'Job Title', type: 'text', name: 'title' },
                 { label: 'Company', type: 'text', name: 'company' },
-                { label: 'Industry', type: 'text', name: 'industry' },
+                { label: 'Email', type: 'email', name: 'email' },
               ].map((field) => (
                 <div key={field.name}>
                   <label className="text-label block mb-1.5" style={{ color: '#646466' }}>
@@ -243,28 +242,6 @@ export default function Contact() {
                   />
                 </div>
               ))}
-
-              <div>
-                <label className="text-label block mb-1.5" style={{ color: '#646466' }}>
-                  Primary Use Case
-                </label>
-                <textarea
-                  name="usecase"
-                  rows={3}
-                  className="w-full px-4 py-3 text-sm bg-transparent outline-none resize-none"
-                  style={{
-                    color: '#ececec',
-                    border: '1px solid #222226',
-                    borderRadius: '4px',
-                  }}
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = '#3898ec'
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = '#222226'
-                  }}
-                />
-              </div>
 
               <button
                 type="submit"
