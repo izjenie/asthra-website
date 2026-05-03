@@ -15,6 +15,10 @@ export default function About() {
     const blocks = blocksRef.current
     if (!section || !header || !blocks) return
 
+    // Ensure elements are visible before GSAP takes over (mobile fallback)
+    gsap.set(header.children, { opacity: 1, y: 0 })
+    gsap.set(blocks.querySelectorAll('.about-block'), { opacity: 1, y: 0 })
+
     gsap.from(header.children, {
       opacity: 0,
       y: 40,
@@ -42,7 +46,14 @@ export default function About() {
       },
     })
 
+    // Refresh ScrollTrigger after mount to ensure correct positions on mobile
+    const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 100)
+    const handleResize = () => ScrollTrigger.refresh()
+    window.addEventListener('resize', handleResize)
+
     return () => {
+      clearTimeout(refreshTimer)
+      window.removeEventListener('resize', handleResize)
       ScrollTrigger.getAll().forEach((t) => t.kill())
     }
   }, [])
