@@ -78,7 +78,7 @@ export default function Contact() {
       />
 
       {/* Content */}
-      <div className="sticky top-0 w-full h-screen flex flex-col items-center justify-center px-[5vw]">
+      <div className="sticky top-0 w-full h-screen flex flex-col items-center justify-center px-[5vw]" style={{ zIndex: 1 }}>
         <div ref={textItemsRef} className="text-center space-y-8">
           <div
             className="reveal-text font-display"
@@ -148,7 +148,7 @@ export default function Contact() {
       </div>
 
       {/* Contact Info */}
-      <div className="relative px-[5vw] py-[10vw]" style={{ zIndex: 3 }}>
+      <div className="relative px-[5vw] py-[10vw]" style={{ zIndex: 5, backgroundColor: '#000000' }}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-[3vw] max-w-[90vw] mx-auto">
           <div>
             <div className="text-label mb-3" style={{ color: '#646466' }}>SINGAPORE</div>
