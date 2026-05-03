@@ -57,29 +57,29 @@ export default function Dilemma() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-[150vh] flex"
+      className="relative w-full flex flex-col md:flex-row"
       id="dilemma"
     >
-      {/* Left Column - Sticky Text */}
-      <div className="w-1/2 sticky top-0 h-screen flex items-center justify-center bg-off-white">
-        <div ref={textRef} className="px-[5vw]">
+      {/* Text */}
+      <div className="w-full md:w-1/2 flex items-center justify-center bg-off-white py-16 md:py-0 md:h-screen md:sticky md:top-0">
+        <div ref={textRef} className="px-6 md:px-[5vw] max-w-xl">
           <h2 className="text-h2" style={{ color: '#0a0a0a' }}>
             Data sovereignty shouldn't mean sacrificing cutting-edge intelligence.
           </h2>
-          <p className="text-paragraph-large mt-6" style={{ color: '#646466' }}>
+          <p className="text-paragraph-large mt-4" style={{ color: '#646466' }}>
             Cloud APIs compromise data sovereignty and cost predictability, while traditional on-premise hardware is prohibitively expensive and complex.
           </p>
         </div>
       </div>
 
-      {/* Right Column - Video */}
-      <div ref={videoRef} className="w-1/2 h-[150vh] relative">
+      {/* Video */}
+      <div ref={videoRef} className="w-full md:w-1/2 md:h-screen relative">
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="sticky top-0 w-full h-screen object-cover"
+          className="w-full h-64 md:h-screen object-cover"
         >
           <source src="/video_banking.mp4" type="video/mp4" />
         </video>

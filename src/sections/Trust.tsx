@@ -57,11 +57,11 @@ export default function Trust() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-[6vw] px-[5vw]"
+      className="relative w-full py-12 md:py-16 px-[5vw]"
       style={{ backgroundColor: '#ececec' }}
       id="trust"
     >
-      <div ref={headerRef} className="text-center mb-[4vw]">
+      <div ref={headerRef} className="text-center mb-8">
         <div className="text-eyebrow mb-4" style={{ color: '#3898ec' }}>
           TRUSTED BY INDUSTRY LEADERS
         </div>

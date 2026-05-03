@@ -62,7 +62,7 @@ export default function Contact() {
     <section
       ref={sectionRef}
       className="relative w-full"
-      style={{ minHeight: '150vh', backgroundColor: '#000000' }}
+      style={{ backgroundColor: '#000000' }}
       id="contact"
     >
       {/* Progress Line */}
@@ -78,19 +78,15 @@ export default function Contact() {
       />
 
       {/* Content */}
-      <div className="sticky top-0 w-full h-screen flex flex-col items-center justify-center px-[5vw]" style={{ zIndex: 1 }}>
-        <div ref={textItemsRef} className="text-center space-y-8">
+      <div className="relative w-full flex flex-col items-center justify-center px-[5vw] py-16 md:py-24" style={{ zIndex: 1 }}>
+        <div ref={textItemsRef} className="text-center space-y-4 md:space-y-8">
           <div
             className="reveal-text font-display"
             style={{
-              fontSize: 'clamp(32px, 5vw, 80px)',
+              fontSize: 'clamp(28px, 5vw, 80px)',
               fontWeight: 400,
               lineHeight: 1.2,
               color: '#ececec',
-              filter: 'blur(10px)',
-              opacity: 0.2,
-              transform: 'perspective(1000px) rotateX(90deg)',
-              transition: 'none',
             }}
           >
             Ready to Deploy
@@ -98,14 +94,10 @@ export default function Contact() {
           <div
             className="reveal-text font-display"
             style={{
-              fontSize: 'clamp(32px, 5vw, 80px)',
+              fontSize: 'clamp(28px, 5vw, 80px)',
               fontWeight: 400,
               lineHeight: 1.2,
               color: '#ececec',
-              filter: 'blur(10px)',
-              opacity: 0.2,
-              transform: 'perspective(1000px) rotateX(90deg)',
-              transition: 'none',
             }}
           >
             Sovereign AI?
@@ -113,14 +105,10 @@ export default function Contact() {
           <div
             className="reveal-text font-display"
             style={{
-              fontSize: 'clamp(32px, 5vw, 80px)',
+              fontSize: 'clamp(28px, 5vw, 80px)',
               fontWeight: 400,
               lineHeight: 1.2,
               color: '#ececec',
-              filter: 'blur(10px)',
-              opacity: 0.2,
-              transform: 'perspective(1000px) rotateX(90deg)',
-              transition: 'none',
             }}
           >
             Request Assessment
@@ -130,7 +118,7 @@ export default function Contact() {
         {/* CTA Button */}
         <button
           onClick={() => setFormOpen(true)}
-          className="mt-12 w-36 h-36 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-105"
+          className="mt-8 md:mt-12 w-28 h-28 md:w-36 md:h-36 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-105"
           style={{
             background: 'conic-gradient(from 0deg, #3898ec, transparent 60%, transparent)',
             padding: '2px',
@@ -140,7 +128,7 @@ export default function Contact() {
             className="w-full h-full rounded-full flex items-center justify-center"
             style={{ backgroundColor: '#000000' }}
           >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ececec" strokeWidth="2">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ececec" strokeWidth="2">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </div>
@@ -148,7 +136,7 @@ export default function Contact() {
       </div>
 
       {/* Contact Info */}
-      <div className="relative px-[5vw] py-[10vw]" style={{ zIndex: 5, backgroundColor: '#000000' }}>
+      <div className="relative px-[5vw] py-12 md:py-16" style={{ zIndex: 5, backgroundColor: '#000000' }}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-[3vw] max-w-[90vw] mx-auto">
           <div>
             <div className="text-label mb-3" style={{ color: '#646466' }}>SINGAPORE</div>

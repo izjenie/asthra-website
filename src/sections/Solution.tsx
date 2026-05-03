@@ -79,11 +79,11 @@ export default function Solution() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-[10vw] px-[5vw]"
+      className="relative w-full py-12 md:py-16 px-[5vw]"
       style={{ backgroundColor: '#000000' }}
       id="solution"
     >
-      <div ref={headerRef} className="text-center mb-[5vw]">
+      <div ref={headerRef} className="text-center mb-8">
         <div className="text-eyebrow mb-4">THE SOLUTION</div>
         <h2 className="text-h2 mx-auto max-w-[50vw]" style={{ color: '#ececec' }}>
           AI-as-a-service, delivered entirely on-premise.

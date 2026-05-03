@@ -65,7 +65,7 @@ export default function Platform() {
     <section
       ref={sectionRef}
       className="relative w-full"
-      style={{ height: '300vh', backgroundColor: '#000000' }}
+      style={{ backgroundColor: '#000000' }}
     >
       {/* Background Video */}
       <video
@@ -73,7 +73,7 @@ export default function Platform() {
         muted
         loop
         playsInline
-        className="fixed top-0 left-0 w-full h-full object-cover"
+        className="absolute top-0 left-0 w-full h-full object-cover hidden md:block"
         style={{ zIndex: 0, opacity: 0.2 }}
       >
         <source src="/video_hardware.mp4" type="video/mp4" />
@@ -134,8 +134,8 @@ export default function Platform() {
       <div
         ref={contentRef}
         id="platform"
-        className="relative px-[5vw] py-[10vw]"
-        style={{ zIndex: 3, backgroundColor: 'rgba(0,0,0,0.85)' }}
+        className="relative px-[5vw] py-12 md:py-16"
+        style={{ zIndex: 3, backgroundColor: 'rgba(0,0,0,0.9)' }}
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[5vw] max-w-[90vw] mx-auto">
           {/* Hardware Block */}

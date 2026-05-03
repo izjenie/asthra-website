@@ -51,13 +51,13 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-5xl">
-        <div ref={eyebrowRef} className="text-eyebrow mb-6">
+        <div ref={eyebrowRef} className="text-eyebrow mb-4">
           SOVEREIGN AI INFRASTRUCTURE
         </div>
 
         <h1
           ref={headlineRef}
-          className="text-hero mb-6"
+          className="text-hero mb-4"
         >
           Frontier AI, Entirely Yours.
         </h1>
@@ -73,7 +73,7 @@ export default function Hero() {
         <button
           ref={ctaRef}
           onClick={scrollToContact}
-          className="mt-10 px-8 py-3.5 rounded-full text-sm font-medium tracking-wide transition-opacity duration-300 hover:opacity-85"
+          className="mt-6 px-8 py-3.5 rounded-full text-sm font-medium tracking-wide transition-opacity duration-300 hover:opacity-85"
           style={{ backgroundColor: '#3898ec', color: '#ececec' }}
         >
           Request a Deployment Assessment

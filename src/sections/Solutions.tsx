@@ -107,7 +107,7 @@ export default function Solutions() {
     <section
       ref={sectionRef}
       className="relative w-full"
-      style={{ height: '200vh', backgroundColor: '#000000' }}
+      style={{ backgroundColor: '#000000' }}
     >
       {/* Background Image Container */}
       <div
@@ -121,7 +121,7 @@ export default function Solutions() {
       <div className="absolute inset-0 bg-black/60" />
 
       {/* Circular Mask Container */}
-      <div className="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center">
+      <div className="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center hidden md:flex">
         {/* Circle Mask with Background Image */}
         <div
           ref={circleRef}
@@ -175,7 +175,7 @@ export default function Solutions() {
       <div
         ref={detailsRef}
         id="solutions"
-        className="relative px-[5vw] py-[10vw]"
+        className="relative px-[5vw] py-12 md:py-16"
         style={{ zIndex: 3, backgroundColor: 'rgba(0,0,0,0.9)' }}
       >
         <div className="text-center mb-[5vw]">
