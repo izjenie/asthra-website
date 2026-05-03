@@ -68,7 +68,7 @@ export default function Contact() {
       {/* Progress Line */}
       <div
         ref={indicatorRef}
-        className="fixed left-1/2 top-0 w-px"
+        className="fixed left-1/2 top-0 w-px hidden md:block"
         style={{
           backgroundColor: '#3898ec',
           zIndex: 100,
