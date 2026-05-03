@@ -20,9 +20,9 @@ export default function Header() {
       // @ts-ignore
       const lenis = window.__lenis
       if (lenis && lenis.scrollTo) {
-        lenis.scrollTo(el, { offset: 0, duration: 1.5 })
+        lenis.scrollTo(el, { offset: -56, duration: 1.5 })
       } else {
-        el.scrollIntoView({ behavior: 'smooth' })
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
     }
     setMenuOpen(false)

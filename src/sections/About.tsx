@@ -55,8 +55,8 @@ export default function About() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-[8vw] px-[5vw]"
-      style={{ backgroundColor: '#000000' }}
+      className="relative w-full py-[8vw] px-[5vw] md:pt-[8vw] pt-20"
+      style={{ backgroundColor: '#000000', zIndex: 10 }}
       id="about"
     >
       <div ref={headerRef} className="text-center mb-[5vw]">

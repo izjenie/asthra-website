@@ -39,6 +39,7 @@
 
   html {
     scroll-behavior: auto;
+    scroll-padding-top: 56px;
   }
 
   html.lenis, html.lenis body {
