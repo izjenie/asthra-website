@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import Header from './sections/Header'
 import Hero from './sections/Hero'
-import Dilemma from './sections/Dilemma'
+
 import Solution from './sections/Solution'
 import Models from './sections/Models'
 import Platform from './sections/Platform'
@@ -48,7 +48,6 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <Dilemma />
         <Solution />
         <Models />
         <Platform />
