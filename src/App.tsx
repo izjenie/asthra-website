@@ -9,7 +9,7 @@ import Dilemma from './sections/Dilemma'
 import Solution from './sections/Solution'
 import Models from './sections/Models'
 import Platform from './sections/Platform'
-import Solutions from './sections/Solutions'
+
 import About from './sections/About'
 import Trust from './sections/Trust'
 import Contact from './sections/Contact'
@@ -52,7 +52,6 @@ export default function App() {
         <Solution />
         <Models />
         <Platform />
-        <Solutions />
         <About />
         <Trust />
         <Contact />

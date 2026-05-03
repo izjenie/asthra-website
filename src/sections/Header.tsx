@@ -41,7 +41,6 @@ export default function Header() {
   const navItems = [
     { label: 'Platform', id: 'platform' },
     { label: 'Models', id: 'models' },
-    { label: 'Solutions', id: 'solutions' },
     { label: 'About', id: 'about' },
     { label: 'Contact', id: 'contact' },
   ]
