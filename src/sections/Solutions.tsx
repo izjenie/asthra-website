@@ -4,13 +4,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const industries = [
-  { name: 'BANKING', id: 'banking' },
-  { name: 'HEALTHCARE', id: 'healthcare' },
-  { name: 'RETAIL', id: 'retail' },
-  { name: 'DEFENSE', id: 'defense' },
-]
-
 const industryDetails = [
   {
     id: 'banking',
@@ -40,63 +33,28 @@ const industryDetails = [
 
 export default function Solutions() {
   const sectionRef = useRef<HTMLElement>(null)
-  const circleRef = useRef<HTMLDivElement>(null)
-  const columnsRef = useRef<HTMLDivElement>(null)
   const detailsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const section = sectionRef.current
-    const circle = circleRef.current
-    const columns = columnsRef.current
-    if (!section || !circle || !columns) return
+    const details = detailsRef.current
+    if (!section || !details) return
 
-    // Circle scale animation
-    gsap.fromTo(
-      circle,
-      { scale: 0.2 },
-      {
-        scale: 60,
-        ease: 'none',
+    // Detail cards animation
+    const cards = details.querySelectorAll('.detail-card')
+    cards.forEach((card) => {
+      gsap.from(card, {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out',
         scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 1,
-        },
-      }
-    )
-
-    // Columns slide in from alternating sides
-    const colElements = columns.querySelectorAll('.industry-column')
-    colElements.forEach((col, i) => {
-      gsap.from(col, {
-        x: i % 2 === 0 ? '-100vw' : '100vw',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top bottom',
-          end: 'top center',
-          scrub: 1,
+          trigger: card,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse',
         },
       })
     })
-
-    // Detail cards animation
-    if (detailsRef.current) {
-      const cards = detailsRef.current.querySelectorAll('.detail-card')
-      cards.forEach((card) => {
-        gsap.from(card, {
-          y: 40,
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
-          },
-        })
-      })
-    }
 
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill())
@@ -119,57 +77,6 @@ export default function Solutions() {
 
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/60" />
-
-      {/* Circular Mask Container */}
-      <div className="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center hidden md:flex">
-        {/* Circle Mask with Background Image */}
-        <div
-          ref={circleRef}
-          className="absolute rounded-full"
-          style={{
-            width: '40vw',
-            height: '40vw',
-            background: 'url(/img_government.jpg) no-repeat center center / cover',
-            transform: 'translate(-50%, -50%)',
-            left: '50%',
-            top: '50%',
-            zIndex: 2,
-          }}
-        />
-
-        {/* Text Columns */}
-        <div
-          ref={columnsRef}
-          className="absolute inset-0 flex w-full h-full"
-          style={{ zIndex: 1 }}
-        >
-          {industries.map((industry, i) => (
-            <div
-              key={industry.id}
-              className="industry-column absolute top-0 h-full flex items-center justify-center"
-              style={{
-                left: `${i * 25}%`,
-                width: '25%',
-                writingMode: 'vertical-rl',
-                textOrientation: 'mixed',
-              }}
-            >
-              <span
-                className="whitespace-nowrap font-display"
-                style={{
-                  fontSize: 'clamp(40px, 16vw, 300px)',
-                  fontWeight: 400,
-                  lineHeight: 1,
-                  color: '#0a0a0a',
-                  textShadow: '0 0 30px rgba(236, 236, 236, 0.8)',
-                }}
-              >
-                {industry.name}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
 
       {/* Industry Details */}
       <div
