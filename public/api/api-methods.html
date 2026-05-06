@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Methods | Asthra.io Docs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #ffffff;
+            color: #24292f;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: #f7f8fa;
+            border-right: 1px solid #e1e4e8;
+            padding: 24px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 0 24px 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #e1e4e8;
+            margin-bottom: 16px;
+        }
+
+        .logo {
+            width: 32px;
+            height: 32px;
+            background-color: #2563eb;
+            color: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2328;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0 12px;
+        }
+
+        .nav-menu li {
+            margin-bottom: 2px;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: #656d76;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-menu a:hover {
+            background-color: #eceff3;
+            color: #1f2328;
+        }
+
+        .nav-menu a.active {
+            background-color: #e6f0ff;
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            max-width: 900px;
+            padding: 40px 48px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e1e4e8;
+        }
+
+        .search-box {
+            position: relative;
+            width: 320px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 14px 10px 38px;
+            border: 1px solid #d0d7de;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #f6f8fa;
+            color: #656d76;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #2563eb;
+            background-color: #fff;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #656d76;
+            font-size: 14px;
+        }
+
+        .ask-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border: 1px solid #d0d7de;
+            border-radius: 8px;
+            background: #fff;
+            color: #656d76;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1f2328;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1f2328;
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2328;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 15px;
+            color: #24292f;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        p em {
+            color: #656d76;
+        }
+
+        /* Endpoint Block */
+        .endpoint {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .method {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        }
+
+        .method.get {
+            background-color: #dafbe1;
+            color: #1a7f37;
+        }
+
+        .method.post {
+            background-color: #ddf4ff;
+            color: #0969da;
+        }
+
+        .path {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 14px;
+            color: #1f2328;
+            background-color: #f6f8fa;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid #d0d7de;
+        }
+
+        /* Base URL Box */
+        .base-url {
+            background-color: #f6f8fa;
+            border: 1px solid #d0d7de;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 16px 0 32px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 14px;
+            color: #1f2328;
+        }
+
+        /* Table */
+        .param-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 24px;
+            font-size: 14px;
+        }
+
+        .param-table th {
+            text-align: left;
+            padding: 10px 14px;
+            background-color: #f6f8fa;
+            border-top: 1px solid #d0d7de;
+            border-bottom: 1px solid #d0d7de;
+            font-weight: 600;
+            color: #1f2328;
+        }
+
+        .param-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #e1e4e8;
+            color: #24292f;
+        }
+
+        .param-table td code {
+            background-color: #f6f8fa;
+            padding: 3px 7px;
+            border-radius: 5px;
+            font-size: 13px;
+            border: 1px solid #d0d7de;
+        }
+
+        /* Response Tabs */
+        .response-box {
+            border: 1px solid #d0d7de;
+            border-radius: 10px;
+            margin: 16px 0 32px;
+            overflow: hidden;
+        }
+
+        .response-tabs {
+            display: flex;
+            background-color: #f6f8fa;
+            border-bottom: 1px solid #d0d7de;
+        }
+
+        .response-tab {
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #656d76;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+        }
+
+        .response-tab.active {
+            color: #1f2328;
+            border-bottom-color: #2563eb;
+            background-color: #fff;
+        }
+
+        .response-content {
+            padding: 20px;
+            background-color: #f6f8fa;
+            display: none;
+        }
+
+        .response-content.active {
+            display: block;
+        }
+
+        .request-box {
+            border: 1px solid #d0d7de;
+            border-radius: 10px;
+            margin: 16px 0 32px;
+            overflow: hidden;
+        }
+
+        .request-tabs {
+            display: flex;
+            background-color: #f6f8fa;
+            border-bottom: 1px solid #d0d7de;
+        }
+
+        .request-tab {
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #656d76;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+        }
+
+        .request-tab.active {
+            color: #1f2328;
+            border-bottom-color: #2563eb;
+            background-color: #fff;
+        }
+
+        .request-content {
+            padding: 20px;
+            background-color: #f6f8fa;
+            display: none;
+        }
+
+        .request-content.active {
+            display: block;
+        }
+
+        /* Code Block */
+        .code-block {
+            background-color: #ffffff;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 20px 24px;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .code-block .key {
+            color: #953800;
+        }
+
+        .code-block .string {
+            color: #0a3069;
+        }
+
+        .code-block .number {
+            color: #0550ae;
+        }
+
+        .code-block .boolean {
+            color: #0550ae;
+        }
+
+        .code-block .null {
+            color: #0550ae;
+        }
+
+        /* Navigation Cards */
+        .nav-cards {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .nav-card {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 20px 24px;
+            border: 1px solid #d0d7de;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-card:hover {
+            border-color: #2563eb;
+            background-color: #f6f8fa;
+        }
+
+        .nav-card.prev {
+            justify-content: flex-start;
+            gap: 12px;
+        }
+
+        .nav-card.next {
+            justify-content: space-between;
+        }
+
+        .nav-card-content {
+            text-align: right;
+        }
+
+        .nav-card.prev .nav-card-content {
+            text-align: left;
+        }
+
+        .nav-label {
+            font-size: 13px;
+            color: #656d76;
+            margin-bottom: 4px;
+        }
+
+        .nav-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2328;
+        }
+
+        .nav-arrow {
+            font-size: 20px;
+            color: #656d76;
+        }
+
+        /* Footer */
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 24px;
+            border-top: 1px solid #e1e4e8;
+            font-size: 13px;
+            color: #656d76;
+        }
+.emoji-btn:hover {
+            background-color: #f6f8fa;
+            border-color: #2563eb;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #e1e4e8;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 24px;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .nav-cards {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Menu -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">R</div>
+                <span class="sidebar-title">Asthra.io Docs</span>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Welcome to Asthra.io API</a></li>
+                    <li><a href="authentication.html">Authentication</a></li>
+                    <li><a href="api-methods.html" class="active">API Methods</a></li>
+                    <li><a href="model-inventory.html">Model Inventory</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="top-bar">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <button class="ask-btn">
+                    <span>🤖</span>
+                    <span>Ask</span>
+                </button>
+            </div>
+
+            <h1>API Methods</h1>
+
+            <p>
+                Endpoint kami menggunakan standar yang kompatibel dengan OpenAI API, sehingga 
+                kamu bisa menggunakan library standar seperti <code>openai-python</code> atau <code>langchain</code>.
+            </p>
+
+            <h2>Base URL</h2>
+            <div class="base-url">https://offline.asthra.io</div>
+
+            <h2>List Models</h2>
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="path">/v1/models</span>
+            </div>
+            <p>Gunakan endpoint ini untuk mengecek status dan model apa saja yang sedang <em>running</em> di server.</p>
+
+            <h3>Headers</h3>
+            <table class="param-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Content-Type</td>
+                        <td><code>application/json</code></td>
+                    </tr>
+                    <tr>
+                        <td>api-key</td>
+                        <td><code>API key</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Request</h3>
+            <div class="request-box">
+                <div class="request-tabs">
+                    <div class="request-tab active" onclick="switchRequestTab(this, 'list-curl')">curl</div>
+                    <div class="request-tab" onclick="switchRequestTab(this, 'list-python')">Python</div>
+                </div>
+                <div class="request-content active" id="list-curl">
+                    <div class="code-block">
+                        <pre>curl -X GET <span class="string">"https://offline.asthra.io/v1/models"</span> \\
+  -H <span class="string">"api-key: YOUR_API_KEY"</span> \\
+  -H <span class="string">"Content-Type: application/json"</span></pre>
+                    </div>
+                </div>
+                <div class="request-content" id="list-python">
+                    <div class="code-block">
+                        <pre><span class="key">from</span> openai <span class="key">import</span> OpenAI
+
+client = OpenAI(
+    api_key=<span class="string">"YOUR_API_KEY"</span>,
+    base_url=<span class="string">"https://offline.asthra.io"</span>
+)
+
+models = client.models.list()
+<span class="key">for</span> model <span class="key">in</span> models.data:
+    <span class="key">print</span>(model.id)</pre>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Response</h3>
+            <div class="response-box">
+                <div class="response-tabs">
+                    <div class="response-tab active" onclick="switchResponseTab(this, 'list-200')">200</div>
+                    <div class="response-tab" onclick="switchResponseTab(this, 'list-401')">401</div>
+                </div>
+                <div class="response-content active" id="list-200">
+                    <div class="code-block">
+                        <pre>{
+  <span class="string">"data"</span>: [
+    {
+      <span class="string">"id"</span>: <span class="string">"DeepSeek-V3.1"</span>
+    }
+  ]
+}</pre>
+                    </div>
+                </div>
+                <div class="response-content" id="list-401">
+                    <div class="code-block">
+                        <pre>{
+  <span class="string">"message"</span>: <span class="string">"Unauthorized"</span>,
+  <span class="string">"request_id"</span>: <span class="string">"ebf75436505dab6a69d35b04def99c5a"</span>
+}</pre>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Chat Completions</h2>
+            <div class="endpoint">
+                <span class="method post">POST</span>
+                <span class="path">/v1/chat/completions</span>
+            </div>
+            <p>Endpoint utama untuk berinteraksi dengan model LLM.</p>
+
+            <h3>Headers</h3>
+            <table class="param-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Content-Type</td>
+                        <td><code>application/json</code></td>
+                    </tr>
+                    <tr>
+                        <td>api-key</td>
+                        <td><code>API Key</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Body</h3>
+            <table class="param-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>model</code></td>
+                        <td>string</td>
+                        <td>Model Name</td>
+                    </tr>
+                    <tr>
+                        <td><code>messages</code></td>
+                        <td>list of objects</td>
+                        <td>Message Payload</td>
+                    </tr>
+                    <tr>
+                        <td><code>temperature</code></td>
+                        <td>float</td>
+                        <td>Temperature ( > 0 )</td>
+                    </tr>
+                    <tr>
+                        <td><code>stream</code></td>
+                        <td>bool</td>
+                        <td>Streaming Mode</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Request</h3>
+            <div class="request-box">
+                <div class="request-tabs">
+                    <div class="request-tab active" onclick="switchRequestTab(this, 'chat-curl')">curl</div>
+                    <div class="request-tab" onclick="switchRequestTab(this, 'chat-python')">Python</div>
+                </div>
+                <div class="request-content active" id="chat-curl">
+                    <div class="code-block">
+                        <pre>curl -X POST <span class="string">"https://offline.asthra.io/v1/chat/completions"</span> \\
+  -H <span class="string">"api-key: YOUR_API_KEY"</span> \\
+  -H <span class="string">"Content-Type: application/json"</span> \\
+  -d <span class="string">'{
+    "model": "DeepSeek-V3.1",
+    "messages": [
+      {"role": "user", "content": "Hello!"}
+    ],
+    "temperature": 0.7,
+    "stream": false
+  }'</span></pre>
+                    </div>
+                </div>
+                <div class="request-content" id="chat-python">
+                    <div class="code-block">
+                        <pre><span class="key">from</span> openai <span class="key">import</span> OpenAI
+
+client = OpenAI(
+    api_key=<span class="string">"YOUR_API_KEY"</span>,
+    base_url=<span class="string">"https://offline.asthra.io"</span>
+)
+
+response = client.chat.completions.create(
+    model=<span class="string">"DeepSeek-V3.1"</span>,
+    messages=[
+        {<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"Hello!"</span>}
+    ],
+    temperature=<span class="number">0.7</span>,
+    stream=<span class="boolean">False</span>
+)
+
+<span class="key">print</span>(response.choices[<span class="number">0</span>].message.content)</pre>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Response</h3>
+            <div class="response-box">
+                <div class="response-tabs">
+                    <div class="response-tab active" onclick="switchResponseTab(this, 'chat-200')">200</div>
+                    <div class="response-tab" onclick="switchResponseTab(this, 'chat-401')">401</div>
+                </div>
+                <div class="response-content active" id="chat-200">
+                    <div class="code-block">
+                        <pre>{
+  <span class="string">"id"</span>: <span class="string">"resp-054e64b5578b4458b27fecccc76b43ae"</span>,
+  <span class="string">"choices"</span>: [
+    {
+      <span class="string">"finish_reason"</span>: <span class="string">"stop"</span>,
+      <span class="string">"index"</span>: <span class="number">0</span>,
+      <span class="string">"message"</span>: {
+        <span class="string">"content"</span>: <span class="string">"&lt;think&gt;Hmm, user bertanya tentang ibu kota Indonesia. Ini..."</span>,
+        <span class="string">"refusal"</span>: <span class="null">null</span>,
+        <span class="string">"tool_calls"</span>: <span class="null">null</span>,
+        <span class="string">"role"</span>: <span class="string">"assistant"</span>
+      }
+    }
+  ],
+  <span class="string">"created"</span>: <span class="number">1777803512</span>,
+  <span class="string">"model"</span>: <span class="string">"DeepSeek-V3.1"</span>,
+  <span class="string">"object"</span>: <span class="string">"chat.completion"</span>,
+  <span class="string">"usage"</span>: {
+    <span class="string">"completion_tokens"</span>: <span class="number">420</span>,
+    <span class="string">"prompt_tokens"</span>: <span class="number">13</span>,
+    <span class="string">"total_tokens"</span>: <span class="number">433</span>,
+    <span class="string">"completion_tokens_details"</span>: <span class="null">null</span>,
+    <span class="string">"prompt_tokens_details"</span>: {
+      <span class="string">"audio_tokens"</span>: <span class="number">0</span>,
+      <span class="string">"cached_tokens"</span>: <span class="number">0</span>
+    }
+  }
+}</pre>
+                    </div>
+                </div>
+                <div class="response-content" id="chat-401">
+                    <div class="code-block">
+                        <pre>{
+  <span class="string">"message"</span>: <span class="string">"Unauthorized"</span>,
+  <span class="string">"request_id"</span>: <span class="string">"f5231f735818f858eb2d4b72a96ec170"</span>
+}</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-cards">
+                <a href="authentication.html" class="nav-card prev">
+                    <span class="nav-arrow">‹</span>
+                    <div class="nav-card-content">
+                        <div class="nav-label">Previous</div>
+                        <div class="nav-title">Authentication</div>
+                    </div>
+                </a>
+                <a href="model-inventory.html" class="nav-card next">
+                    <div class="nav-card-content">
+                        <div class="nav-label">Next</div>
+                        <div class="nav-title">Model Inventory</div>
+                    </div>
+                    <span class="nav-arrow">›</span>
+                </a>
+            </div>
+
+            <div class="page-footer">
+                <span>Last updated 2 days ago</span>
+                
+        </main>
+    </div>
+
+    <script>
+        function switchRequestTab(tab, contentId) {
+            var box = tab.closest('.request-box');
+            box.querySelectorAll('.request-tab').forEach(function(t) { t.classList.remove('active'); });
+            box.querySelectorAll('.request-content').forEach(function(c) { c.classList.remove('active'); });
+            tab.classList.add('active');
+            document.getElementById(contentId).classList.add('active');
+        }
+
+        function switchResponseTab(tab, contentId) {
+            var box = tab.closest('.response-box');
+            box.querySelectorAll('.response-tab').forEach(function(t) { t.classList.remove('active'); });
+            box.querySelectorAll('.response-content').forEach(function(c) { c.classList.remove('active'); });
+            tab.classList.add('active');
+            document.getElementById(contentId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
