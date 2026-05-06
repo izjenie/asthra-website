@@ -548,8 +548,8 @@
                         <td><code>application/json</code></td>
                     </tr>
                     <tr>
-                        <td>api-key</td>
-                        <td><code>API key</code></td>
+                        <td>Authorization</td>
+                        <td><code>Bearer &lt;token&gt;</code></td>
                     </tr>
                 </tbody>
             </table>
@@ -563,7 +563,7 @@
                 <div class="request-content active" id="list-curl">
                     <div class="code-block">
                         <pre>curl -X GET <span class="string">"https://offline.asthra.io/v1/models"</span> \\
-  -H <span class="string">"api-key: YOUR_API_KEY"</span> \\
+  -H <span class="string">"Authorization: Bearer YOUR_API_KEY"</span> \\
   -H <span class="string">"Content-Type: application/json"</span></pre>
                     </div>
                 </div>
@@ -679,7 +679,7 @@ models = client.models.list()
                 <div class="request-content active" id="chat-curl">
                     <div class="code-block">
                         <pre>curl -X POST <span class="string">"https://offline.asthra.io/v1/chat/completions"</span> \\
-  -H <span class="string">"api-key: YOUR_API_KEY"</span> \\
+  -H <span class="string">"Authorization: Bearer YOUR_API_KEY"</span> \\
   -H <span class="string">"Content-Type: application/json"</span> \\
   -d <span class="string">'{
     "model": "DeepSeek-V3.1",
